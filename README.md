@@ -45,8 +45,10 @@ Lancer L'application
 
 Documentation API 
 	    
-    - http://localhost:8000/api
+    https://documenter.postman.com/preview/5943399-1e01b199-9942-418f-91da-6123c8b421fd?environment=&versionTag=latest&apiName=CURRENT&version=latest&documentationLayout=classic-double-column&right-sidebar=303030&top-bar=FFFFFF&highlight=EF5B25#d779ebff-0476-4aba-b392-3466bc8073d0
 <hr />
+
+
 
 
 
