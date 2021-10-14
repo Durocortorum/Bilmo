@@ -4,7 +4,6 @@ namespace App\Events;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Entity\Customer;
-use App\Entity\User;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -38,5 +37,10 @@ class PasswordEncoderSubscriber implements EventSubscriberInterface
             $hash = $this->encoder->hashPassword($result, $result->getPassword());
             $result->setPassword($hash);
         }
+        if ($result instanceof Customer && $method === "PATCH") {
+            $hash = $this->encoder->hashPassword($result, $result->getPassword());
+            $result->setPassword($hash);
+        }
+
     }
 }
