@@ -2,7 +2,7 @@
 Un web service exposant une API
 
 <p>Projet 7 du parcours développeur d'application PHP/Symfony chez OpenClassrooms : Créez un web service exposant une API</p>
-<p>Réalisé en PHP 7.3.5 et Symfony 5.1.7</p>
+<p>Réalisé en PHP 7.3.21 et Symfony 4.26.5</p>
 
 Installer l'application
 
