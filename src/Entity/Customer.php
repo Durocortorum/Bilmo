@@ -9,10 +9,23 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
- * @ApiResource
+ * @ApiResource(
+ *     normalizationContext={"groups"={"customer:read"}},
+ *     denormalizationContext={"groups"={"customer:write"}},
+ *     collectionOperations={
+ *      "get"={},
+ *      "post"={},
+ *     },
+ *     itemOperations={
+ *       "get"={},
+ *       "delete"={},
+ *       "patch"={},
+ *     }
+ * )
  */
 class Customer implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -20,22 +33,26 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"customer:write"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"customer:read", "customer:write"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"customer:write"})
      */
     private $roles = ["ROLES_ADMIN"];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups({"customer:read", "customer:write"})
      */
     private $password;
 
@@ -47,6 +64,7 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"customer:read", "customer:write"})
      */
     private $name;
 
