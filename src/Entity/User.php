@@ -10,16 +10,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ApiResource(
- *     normalizationContext={"groups"={"user:read"}},
- *     denormalizationContext={"groups"={"user:write"}},
  *     collectionOperations={
- *      "get"={},
- *      "post"={},
+ *      "get"={
+ *          "normalization_context"={"groups"={"user_read"}}
+ *      },
+ *      "post"
  *     },
  *     itemOperations={
- *       "get"={},
- *       "delete"={},
- *       "patch"={},
+ *       "get"={
+ *          "normalization_context"={"groups"={"user_details_read"}}
+ *      },
+ *       "delete",
+ *       "patch",
+ *       "put",
  *     }
  * )
  */
@@ -29,50 +32,49 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"user:write"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read", "user:write"})
+     * @Groups({"user_read","user_details_read", "customer_details_read"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read", "user:write"})
+     * @Groups({"user_read","user_details_read", "customer_details_read"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read", "user:write"})
+     * @Groups({"user_details_read"})
      */
     private $adress;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read", "user:write"})
+     * @Groups({"user_details_read"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read", "user:write"})
+     * @Groups({"user_details_read"})
      */
     private $phone;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read", "user:write"})
+     * @Groups({"user_details_read"})
      */
     private $email;
 
     /**
      * @ORM\ManyToOne(targetEntity=Customer::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"user:write"})
+     * @Groups({"user_read"})
      */
     private $customer;
 

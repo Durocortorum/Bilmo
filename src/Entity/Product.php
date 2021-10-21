@@ -5,10 +5,27 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
- * @ApiResource
+  * @ApiResource(
+ *     collectionOperations={
+ *         "get"={
+ *              "access_control"="is_granted('ROLE_USER')",
+ *          "normalization_context"={"groups"={"product_read"}}
+ *          },
+ *         "post"={
+ *              "access_control"="is_granted('ROLE_ADMIN')"
+ *          }
+ *      },
+ *     itemOperations={
+ *         "get"={
+ *              "access_control"="is_granted('ROLE_USER')",
+ *              "normalization_context"={"groups"={"product_details_read"}}
+ *          }
+ *     },
+ * )
  */
 class Product
 {
@@ -16,26 +33,31 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"product_details_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"product_read", "product_details_read"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"product_read", "product_details_read"})
      */
     private $brand;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"product_read", "product_details_read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"product_read", "product_details_read"})
      */
     private $description;
 

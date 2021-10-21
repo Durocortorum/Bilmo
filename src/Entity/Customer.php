@@ -14,16 +14,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
  * @ApiResource(
- *     normalizationContext={"groups"={"customer:read"}},
- *     denormalizationContext={"groups"={"customer:write"}},
  *     collectionOperations={
- *      "get"={},
- *      "post"={},
+ *      "get"={
+ *          "normalization_context"={"groups"={"customer_read"}}
+ *      },
+ *      "post"
  *     },
  *     itemOperations={
- *       "get"={},
- *       "delete"={},
- *       "patch"={},
+ *       "get"={
+ *          "normalization_context"={"groups"={"customer_details_read"}}
+ *      },
+ *       "delete",
+ *       "patch",
+ *       "put",
  *     }
  * )
  */
@@ -39,32 +42,31 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"customer:read", "customer:write"})
+     * @Groups({"customer_read", "customer_details_read"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"customer:write"})
      */
     private $roles = ["ROLES_ADMIN"];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Groups({"customer:read", "customer:write"})
      */
     private $password;
 
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="customer", orphanRemoval=true)
+     * @Groups({"customer_details_read"})
      */
     private $users;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"customer:read", "customer:write"})
+     * @Groups({"customer_read", "customer_details_read"})
      */
     private $name;
 
