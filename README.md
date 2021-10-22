@@ -46,6 +46,44 @@ Lancer L'application
 Documentation API 
 	    
     http://localhost:8000/api
+
+<hr />
+
+Inscription
+
+    POST /api/Customers
+
+    Les détails de l’inscription devront être envoyés en format JSON. Les champs email et password sont obligatoires.
+
+    Exemple :
+
+    { 
+        "name": "Société 1", 
+        "email": "test.societe01@gmail.com", 
+        "password": "password" 
+    }
+
+<hr />
+
+Authentification
+
+    L’authentification est obligatoire pour accéder à l’ensemble des fonctionnalités de l’API
+
+    Pour s’authentifier :
+
+    POST /api/login_check
+
+    Les détails du login devront être envoyés en format JSON. L’ensemble des champs (username, password) est obligatoire. L’username correspond en fait à l’email du client.
+
+    Exemple :
+
+    { 
+        "username": "test.societe01@gmail.com", 
+        "password": "password"
+    }
+
+    L’authentification nous permet de récupérer un token, qu’il faudra transmettre à chaque requête, en type Bearer Token.
+
 <hr />
 
 
