@@ -49,7 +49,7 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = ["ROLE_ADMIN"];
+    private $roles = [];
 
     /**
      * @var string The hashed password
@@ -57,18 +57,19 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
-
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"customer_read", "customer_details_read"})
+     */
+    private $name;
+    
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="customer", orphanRemoval=true)
      * @Groups({"customer_details_read"})
      */
     private $users;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"customer_read", "customer_details_read"})
-     */
-    private $name;
+
 
     public function __construct()
     {
@@ -117,7 +118,7 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLe_ADMIN';
 
         return array_unique($roles);
     }
