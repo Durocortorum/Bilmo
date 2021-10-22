@@ -49,7 +49,7 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private $roles = ["ROLE_ADMIN"];
 
     /**
      * @var string The hashed password
