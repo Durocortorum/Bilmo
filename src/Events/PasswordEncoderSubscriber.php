@@ -41,6 +41,10 @@ class PasswordEncoderSubscriber implements EventSubscriberInterface
             $hash = $this->encoder->hashPassword($result, $result->getPassword());
             $result->setPassword($hash);
         }
+        if ($result instanceof Customer && $method === "PUT") {
+            $hash = $this->encoder->hashPassword($result, $result->getPassword());
+            $result->setPassword($hash);
+        }
 
     }
 }

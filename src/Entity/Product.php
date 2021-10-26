@@ -38,7 +38,7 @@ class Product
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"product_read", "product_details_read"})
+     * @Groups({"product_details_read"})
      */
     private $price;
 
@@ -56,7 +56,7 @@ class Product
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"product_read", "product_details_read"})
+     * @Groups({"product_details_read"})
      */
     private $description;
 
