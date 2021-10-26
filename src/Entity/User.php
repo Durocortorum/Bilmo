@@ -32,6 +32,7 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"user_details_read"})
      */
     private $id;
 
@@ -74,7 +75,7 @@ class User
     /**
      * @ORM\ManyToOne(targetEntity=Customer::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"user_read"})
+     * @Groups({"user_details_read"})
      */
     private $customer;
 

@@ -27,7 +27,6 @@ security:
 
         login:
             pattern:  ^/api/login
-           
             stateless: true
             json_login:
                 check_path:               /api/login_check
@@ -36,14 +35,12 @@ security:
 
         api:
             pattern:   ^/api
-           
             stateless: true
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
 
         main:
-           
             lazy: true
             provider: app_user_provider
 

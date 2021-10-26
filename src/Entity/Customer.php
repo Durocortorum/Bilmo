@@ -36,7 +36,7 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"customer:write"})
+     * @Groups({"customer_details_read"})
      */
     private $id;
 
@@ -48,12 +48,14 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"customer_details_read"})
      */
     private $roles = ["ROLE_USER"];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups({"customer_details_read"})
      */
     private $password;
 
