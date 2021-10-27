@@ -9,7 +9,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ApiResource(attributes={"pagination_items_per_page"=3})
  * @ApiResource(
+ *   
+ *    
  *     collectionOperations={
  *      "get"={
  *          "normalization_context"={"groups"={"user_read"}}

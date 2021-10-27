@@ -13,6 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
+ * @ApiResource(attributes={"pagination_items_per_page"=2})
  * @ApiResource(
  *     collectionOperations={
  *      "get"={
